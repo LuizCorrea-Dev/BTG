@@ -351,8 +351,8 @@ const Th = styled.th<{ $sticky?: boolean }>`
   text-align: left;
   font-size: 11px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.textSecondary};
-  background-color: ${(props) => props.theme.colors.surface};
+  color: ${(props) => props.theme.colors.tableHeaderText};
+  background-color: ${(props) => props.theme.colors.tableHeaderBg};
   border-bottom: 1px solid ${(props) => props.theme.colors.border};
   white-space: nowrap;
   ${(props) =>

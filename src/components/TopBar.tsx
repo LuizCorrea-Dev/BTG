@@ -43,8 +43,8 @@ const HeaderContainer = styled.header`
   justify-content: space-between;
   gap: 6px;
   padding: 6px 10px;
-  background-color: ${(props) => props.theme.colors.surface};
-  border-bottom: 1px solid ${(props) => props.theme.colors.border};
+  background-color: ${(props) => props.theme.colors.headerBg};
+  border-bottom: 1px solid ${(props) => props.theme.colors.headerBorder};
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
@@ -62,7 +62,7 @@ const BrandWordmark = styled.button`
   gap: 8px;
   background: transparent;
   border: none;
-  color: ${(props) => props.theme.colors.text};
+  color: ${(props) => props.theme.colors.headerText};
   font-size: 13px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -121,9 +121,9 @@ const NavLinkButton = styled.button<{ $active?: boolean }>`
   background: transparent;
   border: none;
   border-bottom: 2px solid
-    ${(props) => (props.$active ? props.theme.colors.primary : 'transparent')};
+    ${(props) => (props.$active ? props.theme.colors.headerActiveBorder : 'transparent')};
   color: ${(props) =>
-    props.$active ? props.theme.colors.text : props.theme.colors.textSecondary};
+    props.$active ? props.theme.colors.headerText : props.theme.colors.headerTextSecondary};
   font-size: 14px;
   font-weight: ${(props) => (props.$active ? 700 : 500)};
   cursor: pointer;
@@ -132,7 +132,7 @@ const NavLinkButton = styled.button<{ $active?: boolean }>`
   transition: color 140ms ease, border-color 140ms ease;
 
   &:hover {
-    color: ${(props) => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.headerText};
   }
 `;
 
@@ -214,7 +214,7 @@ const MobileBottomBar = styled.nav`
   align-items: center;
   height: 58px;
   background-color: ${(props) => props.theme.colors.surface};
-  border-top: 1px solid ${(props) => props.theme.colors.border};
+  border-top: 2px solid ${(props) => props.theme.colors.headerBorder};
 
   @media (min-width: 1024px) {
     display: none;

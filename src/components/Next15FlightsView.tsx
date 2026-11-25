@@ -163,7 +163,7 @@ const StyledTable = styled.table`
 `;
 
 const TableHead = styled.thead`
-  background-color: ${(props) => props.theme.colors.surface};
+  background-color: ${(props) => props.theme.colors.tableHeaderBg};
   border-bottom: 1px solid ${(props) => props.theme.colors.border};
 `;
 
@@ -172,7 +172,7 @@ const Th = styled.th<{ $align?: 'left' | 'right' | 'center' }>`
   text-align: ${(props) => props.$align || 'left'};
   font-size: 12px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${(props) => props.theme.colors.tableHeaderText};
   white-space: nowrap;
 `;
 

@@ -435,7 +435,7 @@ const Table = styled.table<{ $minWidth?: string }>`
 `;
 
 const Thead = styled.thead`
-  background-color: ${(props) => props.theme.colors.surface};
+  background-color: ${(props) => props.theme.colors.tableHeaderBg};
   border-bottom: 1px solid ${(props) => props.theme.colors.border};
 `;
 
@@ -447,7 +447,7 @@ const Th = styled.th<{
   text-align: ${(props) => props.$align || 'left'};
   font-size: 11px;
   font-weight: 700;
-  color: ${(props) => props.theme.colors.textSecondary};
+  color: ${(props) => props.theme.colors.tableHeaderText};
   white-space: nowrap;
 
   @media (min-width: 768px) {
@@ -461,7 +461,7 @@ const Th = styled.th<{
     position: sticky;
     left: 0;
     z-index: 2;
-    background-color: ${props.theme.colors.surface};
+    background-color: ${props.theme.colors.tableHeaderBg};
     box-shadow: 1px 0 0 ${props.theme.colors.border};
   `
       : ''}

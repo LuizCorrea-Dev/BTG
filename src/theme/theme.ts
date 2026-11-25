@@ -17,6 +17,13 @@ export interface ThemeColors {
   primarySurface: string;
   secondary: string;
   secondarySurface: string;
+  headerBg: string;
+  headerText: string;
+  headerTextSecondary: string;
+  headerBorder: string;
+  headerActiveBorder: string;
+  tableHeaderBg: string;
+  tableHeaderText: string;
   // Operational Flight & Baggage Status Colors (WCAG >= 4.5:1)
   onRouteText: string;
   onRouteBg: string;
@@ -85,36 +92,43 @@ export const lightTheme: AppTheme = {
   radii: sharedRadii,
   colors: {
     background: '#FFFFFF',
-    surface: '#F3F4F6',
+    surface: '#F1F4EA',
     surfaceElevated: '#FFFFFF',
-    surfaceSubtle: '#E5E7EB',
-    surfaceHover: '#E5E7EB',
-    text: '#111827',
-    textSecondary: '#374151',
-    textMuted: '#4B5563',
+    surfaceSubtle: '#E6EBD8',
+    surfaceHover: '#EAF3D2',
+    text: '#111810',
+    textSecondary: '#36422F',
+    textMuted: '#55634C',
     textInverse: '#FFFFFF',
-    border: '#D1D5DB',
-    borderSubtle: '#E5E7EB',
-    primary: '#0369A1',
-    primaryHover: '#075985',
-    primarySurface: '#E0F2FE',
-    secondary: '#1E293B',
-    secondarySurface: '#E2E8F0',
+    border: '#C5D1A5',
+    borderSubtle: '#E2E8D5',
+    primary: '#5E8000',
+    primaryHover: '#4B6700',
+    primarySurface: '#EEF6D6',
+    secondary: '#1A2116',
+    secondarySurface: '#E5E9DF',
+    headerBg: '#95C11F',
+    headerText: '#111810',
+    headerTextSecondary: '#243018',
+    headerBorder: '#7BA314',
+    headerActiveBorder: '#111810',
+    tableHeaderBg: '#A9CF38',
+    tableHeaderText: '#111810',
     onRouteText: '#9A3412',
     onRouteBg: '#FFEDD5',
-    deliveredText: '#166534',
-    deliveredBg: '#DCFCE7',
-    loadedText: '#075985',
-    loadedBg: '#E0F2FE',
+    deliveredText: '#3F6212',
+    deliveredBg: '#ECFCCB',
+    loadedText: '#1D4ED8',
+    loadedBg: '#DBEAFE',
     missingText: '#991B1B',
     missingBg: '#FEE2E2',
     bffText: '#115E59',
     bffBg: '#CCFBF1',
-    departureText: '#075985',
-    departureBg: '#E0F2FE',
+    departureText: '#3F6212',
+    departureBg: '#ECFCCB',
     arrivalText: '#166534',
     arrivalBg: '#DCFCE7',
-    overlayBackdrop: 'rgba(15, 23, 42, 0.65)',
+    overlayBackdrop: 'rgba(17, 24, 16, 0.65)',
   },
 };
 
@@ -139,6 +153,13 @@ export const darkTheme: AppTheme = {
     primarySurface: 'rgba(56, 189, 248, 0.14)',
     secondary: '#E2E8F0',
     secondarySurface: '#334155',
+    headerBg: '#1E293B',
+    headerText: '#F8FAFC',
+    headerTextSecondary: '#CBD5E1',
+    headerBorder: '#334155',
+    headerActiveBorder: '#38BDF8',
+    tableHeaderBg: '#1E293B',
+    tableHeaderText: '#CBD5E1',
     onRouteText: '#FDBA74',
     onRouteBg: 'rgba(249, 115, 22, 0.16)',
     deliveredText: '#4ADE80',
