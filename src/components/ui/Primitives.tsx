@@ -126,10 +126,12 @@ export const AppShell = styled.div<{ $lockViewport?: boolean }>`
   ${(props) =>
     props.$lockViewport &&
     css`
-      height: 100dvh;
-      max-height: 100dvh;
-      overflow: hidden;
-      padding-bottom: 58px;
+      @media (min-width: 960px) {
+        height: 100dvh;
+        max-height: 100dvh;
+        overflow: hidden;
+        padding-bottom: 58px;
+      }
 
       @media (min-width: 1024px) {
         padding-bottom: 0;
@@ -164,8 +166,10 @@ export const MainViewport = styled.main<{
   ${(props) =>
     props.$lockViewport &&
     css`
-      min-height: 0;
-      overflow: hidden;
+      @media (min-width: 960px) {
+        min-height: 0;
+        overflow: hidden;
+      }
 
       @media (max-height: 520px) {
         overflow: visible;

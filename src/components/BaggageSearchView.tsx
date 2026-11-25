@@ -35,11 +35,52 @@ interface BaggageSearchViewProps {
 
 const BaggagePanel = styled(SurfacePanel)`
   flex: 1;
-  min-height: 0;
-  overflow: hidden;
+
+  @media (min-width: 960px) {
+    min-height: 0;
+    overflow: hidden;
+  }
 
   @media (max-height: 520px) {
     overflow: visible;
+  }
+`;
+
+const StatusFilterBar = styled(SegmentedControlBar)`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    width: auto;
+  }
+`;
+
+const StatusFilterButton = styled(SegmentedButton)`
+  width: 100%;
+  min-height: 38px;
+  padding: 6px 4px;
+  font-size: 11px;
+  gap: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @media (min-width: 1024px) {
+    width: auto;
+    min-height: 44px;
+    padding: ${(props) => props.theme.spacing.xs} ${(props) => props.theme.spacing.sm};
+    font-size: 13px;
+    gap: ${(props) => props.theme.spacing.xs};
+  }
+`;
+
+const DesktopActionButtons = styled.div`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: contents;
   }
 `;
 
@@ -212,11 +253,6 @@ const EmptyCell = styled.td`
 const MobileBagCards = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: 2px;
   gap: ${(props) => props.theme.spacing.xs};
 
   @media (min-width: 960px) {
@@ -304,19 +340,16 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
     <BaggagePanel>
       <HeaderRow>
         <TitleBlock>
-          <Title>
-            Busca e Identificação de Bagagem em Tempo Real (LPN Parcial ou Completo)
-          </Title>
+          <Title>Busca de Bagagem em Tempo Real</Title>
           <Subtitle>
-            Pesquise por qualquer parte do código da etiqueta (ex: 4 últimos ou 6
-            últimos dígitos), código LPN completo de 10 dígitos, número do voo ou
-            contentor ULD, com filtros de status instantâneos.
+            Pesquise por etiqueta (parcial ou LPN de 10 dígitos), voo ou ULD, com
+            filtros de status instantâneos.
           </Subtitle>
         </TitleBlock>
 
         {/* Real-Time Status Filter Tabs */}
-        <SegmentedControlBar role="group" aria-label="Filtros de Status da Bagagem">
-          <SegmentedButton
+        <StatusFilterBar role="group" aria-label="Filtros de Status da Bagagem">
+          <StatusFilterButton
             type="button"
             $active={filters.status === 'ALL' && !filters.onlyBff}
             onClick={() =>
@@ -324,8 +357,8 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             }
           >
             Todas ({counts.total})
-          </SegmentedButton>
-          <SegmentedButton
+          </StatusFilterButton>
+          <StatusFilterButton
             type="button"
             $active={filters.status === 'OnRoute'}
             onClick={() =>
@@ -333,8 +366,8 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             }
           >
             On Route ({counts.onRoute})
-          </SegmentedButton>
-          <SegmentedButton
+          </StatusFilterButton>
+          <StatusFilterButton
             type="button"
             $active={filters.status === 'Delivered'}
             onClick={() =>
@@ -342,8 +375,8 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             }
           >
             Delivered ({counts.delivered})
-          </SegmentedButton>
-          <SegmentedButton
+          </StatusFilterButton>
+          <StatusFilterButton
             type="button"
             $active={filters.status === 'Loaded'}
             onClick={() =>
@@ -351,8 +384,8 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             }
           >
             Loaded ({counts.loaded})
-          </SegmentedButton>
-          <SegmentedButton
+          </StatusFilterButton>
+          <StatusFilterButton
             type="button"
             $active={filters.status === 'Missing'}
             onClick={() =>
@@ -360,8 +393,8 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             }
           >
             Missing ({counts.missing})
-          </SegmentedButton>
-          <SegmentedButton
+          </StatusFilterButton>
+          <StatusFilterButton
             type="button"
             $active={filters.onlyBff}
             onClick={() =>
@@ -373,8 +406,8 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
           >
             <Layers size={14} />
             <span>BFF ({counts.bff})</span>
-          </SegmentedButton>
-        </SegmentedControlBar>
+          </StatusFilterButton>
+        </StatusFilterBar>
       </HeaderRow>
 
       <SearchForm onSubmit={handleDirectTraceSubmit}>
@@ -426,33 +459,35 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             </StyledSelect>
           </FieldCol>
 
-          <AgnosticButton
-            type="button"
-            variant="secondary"
-            onClick={() => setIsScannerOpen(true)}
-            data-testid="btn-open-barcode-scanner"
-          >
-            <ScanBarcode size={17} />
-            <span>Escanear Código de Barras</span>
-          </AgnosticButton>
+          <DesktopActionButtons>
+            <AgnosticButton
+              type="button"
+              variant="secondary"
+              onClick={() => setIsScannerOpen(true)}
+              data-testid="btn-open-barcode-scanner"
+            >
+              <ScanBarcode size={17} />
+              <span>Escanear Código de Barras</span>
+            </AgnosticButton>
 
-          <AgnosticButton
-            type="submit"
-            variant="primary"
-            disabled={filters.query.trim().length < 3}
-          >
-            <ScanSearch size={17} />
-            <span>Rastrear LPN na API</span>
-          </AgnosticButton>
+            <AgnosticButton
+              type="submit"
+              variant="primary"
+              disabled={filters.query.trim().length < 3}
+            >
+              <ScanSearch size={17} />
+              <span>Rastrear LPN na API</span>
+            </AgnosticButton>
 
-          <AgnosticButton
-            type="button"
-            variant="outline"
-            onClick={onResetFilters}
-          >
-            <RotateCcw size={16} />
-            <span>Limpar</span>
-          </AgnosticButton>
+            <AgnosticButton
+              type="button"
+              variant="outline"
+              onClick={onResetFilters}
+            >
+              <RotateCcw size={16} />
+              <span>Limpar</span>
+            </AgnosticButton>
+          </DesktopActionButtons>
         </SearchControlsGrid>
       </SearchForm>
 

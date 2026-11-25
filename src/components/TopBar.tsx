@@ -35,7 +35,7 @@ interface TopBarProps {
 const HeaderContainer = styled.header`
   position: sticky;
   top: 0;
-  z-index: 40;
+  z-index: 50;
   flex-shrink: 0;
   display: flex;
   flex-direction: row;
