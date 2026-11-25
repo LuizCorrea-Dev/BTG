@@ -156,15 +156,27 @@ export const LoginView: React.FC<LoginViewProps> = ({ onLoginSuccess }) => {
           password: passToSubmit,
         }),
       });
-      const data = await res.json();
-      if (res.ok && data.success && data.token) {
+      const rawText = await res.text();
+      let data: any = null;
+      try {
+        data = rawText ? JSON.parse(rawText) : null;
+      } catch {
+        setError(
+          `Resposta inesperada do servidor (HTTP ${res.status}). Verifique o serviço de API e tente novamente.`
+        );
+        return;
+      }
+
+      if (res.ok && data?.success && data?.token) {
         onLoginSuccess({
           token: data.token,
           location: data.location || 'OPO',
           username: data.username || userToSubmit.trim(),
         });
       } else {
-        setError(data.error || 'Falha na autenticação junto ao servidor BagsToGo.');
+        setError(
+          data?.error || 'Falha na autenticação junto ao servidor BagsToGo.'
+        );
       }
     } catch (err: any) {
       setError(err?.message || 'Erro de ligação ao serviço BagsToGo.');

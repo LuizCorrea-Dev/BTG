@@ -1,4 +1,4 @@
-import {
+import type {
   AirlineOption,
   ArrivalBeltGroup,
   ArrivalPerformanceRecord,
@@ -11,7 +11,7 @@ import {
   DepartureFlightContainerInfo,
   FlightFilters,
   FlightRecord,
-} from '../types/bagstogo';
+} from '../types/bagstogo.js';
 
 export const AIRLINE_NAMES: Record<string, string> = {
   TAP: 'TAP Air Portugal',

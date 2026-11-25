@@ -1,13 +1,13 @@
 import crypto from 'crypto';
 import express from 'express';
-import {
+import type {
   BagCategory,
   BagItem,
   BaggageDetailResponse,
   DashboardSnapshot,
   FlightDetailResponse,
   SorterChuteStatus,
-} from '../src/types/bagstogo';
+} from '../src/types/bagstogo.js';
 import {
   buildAirlineOptions,
   buildUnifiedFlights,
@@ -15,7 +15,7 @@ import {
   normalizeBagItem,
   normalizeBaggageTraceEvents,
   parseBagsToGoPayload,
-} from '../src/utils/bagstogoLogic';
+} from '../src/utils/bagstogoLogic.js';
 
 const BAGSTOGO_BASE =
   'https://bagstogo.ana.pt/bagstogo/WebService/BagsToGo.Frontend.BagsToGo.svc';
