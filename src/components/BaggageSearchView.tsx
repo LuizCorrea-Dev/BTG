@@ -33,6 +33,20 @@ interface BaggageSearchViewProps {
   onSelectBagLpn: (lpn: string) => void;
 }
 
+const BaggagePanel = styled(SurfacePanel)`
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+
+  @media (max-height: 520px) {
+    overflow: visible;
+  }
+`;
+
+const SearchForm = styled.form`
+  flex-shrink: 0;
+`;
+
 const HeaderRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -40,6 +54,7 @@ const HeaderRow = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: ${(props) => props.theme.spacing.sm};
+  flex-shrink: 0;
 `;
 
 const TitleBlock = styled.div`
@@ -115,11 +130,29 @@ const Label = styled.label`
 
 const DesktopTableContainer = styled.div`
   display: none;
+  flex: 1;
+  min-height: 0;
   width: 100%;
+  overflow-y: auto;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   border: 1px solid ${(props) => props.theme.colors.border};
   border-radius: ${(props) => props.theme.radii.md};
   background-color: ${(props) => props.theme.colors.background};
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.colors.surface};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme.colors.border};
+  }
 
   @media (min-width: 960px) {
     display: block;
@@ -128,11 +161,15 @@ const DesktopTableContainer = styled.div`
 
 const Table = styled.table`
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 13px;
 `;
 
 const Th = styled.th`
+  position: sticky;
+  top: 0;
+  z-index: 2;
   padding: ${(props) => props.theme.spacing.xs} 10px;
   text-align: left;
   font-size: 12px;
@@ -144,16 +181,16 @@ const Th = styled.th`
 `;
 
 const Tr = styled.tr`
-  border-bottom: 1px solid ${(props) => props.theme.colors.borderSubtle};
   cursor: pointer;
 
-  &:hover {
+  &:hover td {
     background-color: ${(props) => props.theme.colors.surfaceHover};
   }
 `;
 
 const Td = styled.td`
   padding: ${(props) => props.theme.spacing.xs} 10px;
+  border-bottom: 1px solid ${(props) => props.theme.colors.borderSubtle};
   white-space: nowrap;
   height: 48px;
 `;
@@ -175,6 +212,11 @@ const EmptyCell = styled.td`
 const MobileBagCards = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-right: 2px;
   gap: ${(props) => props.theme.spacing.xs};
 
   @media (min-width: 960px) {
@@ -259,7 +301,7 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
   };
 
   return (
-    <SurfacePanel>
+    <BaggagePanel>
       <HeaderRow>
         <TitleBlock>
           <Title>
@@ -335,7 +377,7 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
         </SegmentedControlBar>
       </HeaderRow>
 
-      <form onSubmit={handleDirectTraceSubmit}>
+      <SearchForm onSubmit={handleDirectTraceSubmit}>
         <SearchControlsGrid>
           <FieldCol>
             <Label htmlFor="baggage-lpn-search">
@@ -412,7 +454,7 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
             <span>Limpar</span>
           </AgnosticButton>
         </SearchControlsGrid>
-      </form>
+      </SearchForm>
 
       <DesktopTableContainer>
         <Table aria-label="Resultados da Busca de Bagagens em Tempo Real">
@@ -544,6 +586,6 @@ export const BaggageSearchView: React.FC<BaggageSearchViewProps> = ({
           onScanSuccess={handleBarcodeScanSuccess}
         />
       )}
-    </SurfacePanel>
+    </BaggagePanel>
   );
 };

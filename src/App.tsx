@@ -367,31 +367,29 @@ export default function App() {
     Boolean(authToken) && isLandscapeMobile && activeTab === 'arrivals';
   const showOnlyLandscapeDeparturesTable =
     Boolean(authToken) && isLandscapeMobile && activeTab === 'departures';
+  const isBaggageTab = Boolean(authToken) && activeTab === 'baggage';
 
   return (
     <ThemeProvider theme={activeTheme}>
       <GlobalThemeStyle />
-      <AppShell>
-        {!showOnlyLandscapeArrivalsTable &&
-          !showOnlyLandscapeDeparturesTable && (
-            <TopBar
-              serverTimeIso={snapshot?.serverTime || new Date().toISOString()}
-              activeTab={activeTab}
-              onSelectTab={handleSelectTab}
-              themeMode={themeMode}
-              onToggleTheme={() =>
-                setThemeMode((prev) => (prev === 'dark' ? 'light' : 'dark'))
-              }
-              isAuthenticated={Boolean(authToken)}
-              username={username}
-              airport={sessionAirport}
-              wsConnected={wsConnected}
-              isFullScreen={isFullScreen}
-              onToggleFullScreen={handleToggleFullScreen}
-              onRefresh={() => fetchDashboardRest(authToken, sessionAirport)}
-              onLogout={handleLogout}
-            />
-          )}
+      <AppShell $lockViewport={isBaggageTab}>
+        <TopBar
+          serverTimeIso={snapshot?.serverTime || new Date().toISOString()}
+          activeTab={activeTab}
+          onSelectTab={handleSelectTab}
+          themeMode={themeMode}
+          onToggleTheme={() =>
+            setThemeMode((prev) => (prev === 'dark' ? 'light' : 'dark'))
+          }
+          isAuthenticated={Boolean(authToken)}
+          username={username}
+          airport={sessionAirport}
+          wsConnected={wsConnected}
+          isFullScreen={isFullScreen}
+          onToggleFullScreen={handleToggleFullScreen}
+          onRefresh={() => fetchDashboardRest(authToken, sessionAirport)}
+          onLogout={handleLogout}
+        />
 
         {!authToken ? (
           <LoginView onLoginSuccess={handleLoginSuccess} />
@@ -413,7 +411,7 @@ export default function App() {
             />
           </MainViewport>
         ) : (
-          <MainViewport $isFullScreen={isFullScreen}>
+          <MainViewport $isFullScreen={isFullScreen} $lockViewport={isBaggageTab}>
             {/* Real-Time Totals, Malas no BFF & Belt Loading Status (only on main Voos dashboard tab) */}
             {activeTab === 'dashboard' && (
               <BffAndBeltSummary

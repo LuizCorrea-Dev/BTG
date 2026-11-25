@@ -110,7 +110,7 @@ export const AgnosticButton: React.FC<AgnosticButtonProps> = ({
   );
 };
 
-export const AppShell = styled.div`
+export const AppShell = styled.div<{ $lockViewport?: boolean }>`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -122,9 +122,31 @@ export const AppShell = styled.div`
   @media (min-width: 1024px) {
     padding-bottom: ${(props) => props.theme.spacing.md};
   }
+
+  ${(props) =>
+    props.$lockViewport &&
+    css`
+      height: 100dvh;
+      max-height: 100dvh;
+      overflow: hidden;
+      padding-bottom: 58px;
+
+      @media (min-width: 1024px) {
+        padding-bottom: 0;
+      }
+
+      @media (max-height: 520px) {
+        height: auto;
+        max-height: none;
+        overflow: visible;
+      }
+    `}
 `;
 
-export const MainViewport = styled.main<{ $isFullScreen?: boolean }>`
+export const MainViewport = styled.main<{
+  $isFullScreen?: boolean;
+  $lockViewport?: boolean;
+}>`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -138,6 +160,17 @@ export const MainViewport = styled.main<{ $isFullScreen?: boolean }>`
     padding: ${(props) => props.theme.spacing.md};
     gap: ${(props) => props.theme.spacing.md};
   }
+
+  ${(props) =>
+    props.$lockViewport &&
+    css`
+      min-height: 0;
+      overflow: hidden;
+
+      @media (max-height: 520px) {
+        overflow: visible;
+      }
+    `}
 `;
 
 export const SurfacePanel = styled.section`

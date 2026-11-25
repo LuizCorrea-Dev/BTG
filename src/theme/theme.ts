@@ -162,7 +162,7 @@ export const GlobalThemeStyle = createGlobalStyle`
     background-color: ${(props) => props.theme.colors.background};
     color: ${(props) => props.theme.colors.text};
     transition: background-color 160ms ease, color 160ms ease;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
 
   * {
