@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#0F172A" stroke="#1E3A5F" stroke-width="2.5" />
+  <!-- Alça superior da mala -->
+  <path d="M24 19V15C24 13.3431 25.3431 12 27 12H37C38.6569 12 40 13.3431 40 15V19" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round" />
+  <!-- Corpo principal da mala -->
+  <rect x="14" y="19" width="36" height="30" rx="5" fill="#1E293B" stroke="#38BDF8" stroke-width="3.2" />
+  <!-- Divisórias verticais e faixa da etiqueta -->
+  <line x1="25" y1="20" x2="25" y2="48" stroke="#38BDF8" stroke-width="2.4" stroke-opacity="0.7" />
+  <line x1="39" y1="20" x2="39" y2="48" stroke="#38BDF8" stroke-width="2.4" stroke-opacity="0.7" />
+  <rect x="28.5" y="27" width="7" height="12" rx="1.5" fill="#38BDF8" />
+  <!-- Rodas / base -->
+  <rect x="19" y="49" width="6" height="4" rx="1.5" fill="#38BDF8" />
+  <rect x="39" y="49" width="6" height="4" rx="1.5" fill="#38BDF8" />
+  <!-- Indicador em tempo real (OCC Live) -->
+  <circle cx="51" cy="13" r="6.5" fill="#0F172A" />
+  <circle cx="51" cy="13" r="4.5" fill="#4ADE80" />
+</svg>

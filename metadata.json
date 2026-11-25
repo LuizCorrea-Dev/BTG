@@ -1,0 +1,5 @@
+{
+  "name": "BagsToGo OCC — Monitoramento de Bagagens em Tempo Real",
+  "description": "Plataforma operacional em tempo real integrada à API BagsToGo (ANA Aeroportos / Groundforce) para controle de voos, performance de chegadas, BFF, esteiras e rastreamento cronológico de bagagens.",
+  "requestFramePermissions": ["camera"]
+}
